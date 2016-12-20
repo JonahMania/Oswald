@@ -1,0 +1,14 @@
+{
+  "name": "oswald",
+  "version": "1.0.0",
+  "description": "A slackbot for Stevens Ultimate",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Jonah Mania",
+  "license": "ISC",
+  "dependencies": {
+    "slackbots": "^1.0.1"
+  }
+}
