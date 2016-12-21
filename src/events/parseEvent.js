@@ -17,8 +17,8 @@ var parseEvent = function( calEvent ){
     //Return full string
     return title + '\n' +
     'Location: ' + location + '\n' +
-    'startTime: ' + startTime + '\n' +
-    'endTime: ' + endTime;
+    'Start: ' + startTime + '\n' +
+    'End: ' + endTime;
 }
 
 module.exports = parseEvent;

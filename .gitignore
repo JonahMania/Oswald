@@ -1,5 +1,7 @@
 node_modules
 token.js
 client_secret.json
-credentials
 npm-debug.log
+credentials/calendar-nodejs.json
+credentials/client_secret.json
+credentials/slackToken.json

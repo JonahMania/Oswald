@@ -2,7 +2,7 @@ const https = require('https');
 const fs = require('fs');
 var google = require('googleapis');
 const authorize = require('./authorize');
-const practices = require('./practices');
+const events = require('./events');
 
 //Google api links for practice and tournament calendars
 const practiceURL = "9h5c4p0859pr36q7h3s8j6qges@group.calendar.google.com";
@@ -17,7 +17,7 @@ const tournamentURL = "88b310nv65rmano79sclvvsnms@group.calendar.google.com";
 */
 var loadCalendar = function( url, maxEvents, callback ){
     //Load client secrets from a local file.
-    fs.readFile('client_secret.json', function processClientSecrets(error, content) {
+    fs.readFile('credentials/client_secret.json', function processClientSecrets(error, content) {
         if(error){
             callback(error,null);
             return;
@@ -50,7 +50,7 @@ var getNextPractices = function( count, callback ){
         if(error){
             callback(error,null)
         }else{
-            callback(null,practices.getNext(data));
+            callback(null,events.getNext(data));
         }
     });
 }
