@@ -9,6 +9,9 @@
   "author": "Jonah Mania",
   "license": "ISC",
   "dependencies": {
+    "dateformat": "^2.0.0",
+    "google-auth-library": "^0.9.10",
+    "googleapis": "^15.0.0",
     "slackbots": "^1.0.1"
   }
 }

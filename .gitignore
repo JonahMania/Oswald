@@ -1,2 +1,5 @@
 node_modules
 token.js
+client_secret.json
+credentials
+npm-debug.log
