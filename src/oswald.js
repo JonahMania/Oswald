@@ -29,12 +29,34 @@ class Oswald extends Bot {
     * @param {object} message Object with message from a user
     */
     onMessage( message ){
+        var that = this;
         //Check that we are getting a chat message
         if( message.type === 'message' && Boolean(message.text) && typeof message.channel === 'string'){
+            //Handle !nextPractices
+            if( message.text.indexOf("!nextPractices") !== -1 ){
+                // var channel = that.getNameById(message.channel);
+
+                events.getNextPractices(3,function(error,response){
+                    if(error){
+                        console.error(error);
+                    }
+                    that.postMessage(message.channel,response,{as_user: true});
+                });
+            }
+            //Handle !nextPractice
+            else if( message.text.indexOf("!nextPractice") !== -1 ){
+                // var channel = that.getNameById(message.channel);
+
+                events.getNextPractices(1,function(error,response){
+                    if(error){
+                        console.error(error);
+                    }
+                    that.postMessage(message.channel,response,{as_user: true});
+                });
+            }
             //Check if the message was directed at the bot
             if( message.text.indexOf("<@"+this.self.id+">") !== -1 ){
                 console.log("recieved a message from user " + message.user);
-                var that = this;
                 //If the user wants to know when the next practice is
                 if( new RegExp("practice").test(message.text)){
                     events.getNextPractices(1,function(error,response){

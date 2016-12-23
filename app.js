@@ -1,7 +1,7 @@
 const fs = require('fs');
 var Oswald = require("./src/oswald");
 
-//Load client secrets from a local file.
+//Read slack API token
 fs.readFile('credentials/slackToken.json', function processClientSecrets(error, content) {
     if(error){
         console.error(error);
