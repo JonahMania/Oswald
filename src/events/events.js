@@ -7,7 +7,7 @@ var getNext = function( data ){
     var ret = "";
     //If there are now future events
     if( data.items.length === 0 ){
-        return "There are no upcoming practices"
+        return "There are no upcoming events"
     }
     //Return the parsed event
     data.items.forEach(function(practice, index){

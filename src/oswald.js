@@ -54,6 +54,28 @@ class Oswald extends Bot {
                     that.postMessage(message.channel,response,{as_user: true});
                 });
             }
+            //Handle !nextTournaments
+            if( message.text.indexOf("!nextTournaments") !== -1 ){
+                // var channel = that.getNameById(message.channel);
+
+                events.getNextTournaments(3,function(error,response){
+                    if(error){
+                        console.error(error);
+                    }
+                    that.postMessage(message.channel,response,{as_user: true});
+                });
+            }
+            //Handle !nextTournament
+            else if( message.text.indexOf("!nextTournament") !== -1 ){
+                // var channel = that.getNameById(message.channel);
+
+                events.getNextTournaments(1,function(error,response){
+                    if(error){
+                        console.error(error);
+                    }
+                    that.postMessage(message.channel,response,{as_user: true});
+                });
+            }
             //Check if the message was directed at the bot
             if( message.text.indexOf("<@"+this.self.id+">") !== -1 ){
                 //If the user asks for a definition

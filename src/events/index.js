@@ -55,4 +55,21 @@ var getNextPractices = function( count, callback ){
     });
 }
 
-module.exports .getNextPractices = getNextPractices;
+/**
+* Gets the next tournaments as a formatted string
+* @param {int} count The max number of tournaments to get
+* @param {function} callback Function to run when calendar is recieved takes
+* arguments error and response
+*/
+var getNextTournaments = function( count, callback ){
+    loadCalendar(tournamentURL,count,function(error,data){
+        if(error){
+            callback(error,null)
+        }else{
+            callback(null,events.getNext(data));
+        }
+    });
+}
+
+module.exports.getNextPractices = getNextPractices;
+module.exports.getNextTournaments = getNextTournaments
