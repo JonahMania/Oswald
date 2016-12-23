@@ -3,6 +3,25 @@ const util = require('util');
 const dictionaryParser = require("./dictionary/dictionaryParser");
 const events = require("./events");
 
+const helpMessage = "commands\n\
+!nextTournament \n\
+displays the next tournament \n\
+!nextTournaments \n\
+displays the next three tournaments \n\
+!nextPractice \n\
+displays the next practice \n\
+!nextPractices \n\
+displays the next three practices \n\
+@oswald define [keyword]\n\
+displays the definition of the requested word \n\
+@oswald help \n\
+displays this message \n\
+@oswald source \n\
+displays a link to my source code \n\
+\n\
+If you find any bugs or wish to improve the bot please contact Jonah Mania or Keyur Ved\n\
+";
+
 class Oswald extends Bot {
     /**
     * Constructor
@@ -31,11 +50,9 @@ class Oswald extends Bot {
     onMessage( message ){
         var that = this;
         //Check that we are getting a chat message
-        if( message.type === 'message' && Boolean(message.text) && typeof message.channel === 'string'){
+        if( message.type === 'message' && Boolean(message.text) && typeof message.channel === 'string' && message.user !== this.self.id ){
             //Handle !nextPractices
-            if( message.text.indexOf("!nextPractices") !== -1 ){
-                // var channel = that.getNameById(message.channel);
-
+            if( message.text.toLowerCase().indexOf("!nextpractices") !== -1 ){
                 events.getNextPractices(3,function(error,response){
                     if(error){
                         console.error(error);
@@ -44,9 +61,7 @@ class Oswald extends Bot {
                 });
             }
             //Handle !nextPractice
-            else if( message.text.indexOf("!nextPractice") !== -1 ){
-                // var channel = that.getNameById(message.channel);
-
+            else if( message.text.toLowerCase().indexOf("!nextpractice") !== -1 ){
                 events.getNextPractices(1,function(error,response){
                     if(error){
                         console.error(error);
@@ -55,9 +70,7 @@ class Oswald extends Bot {
                 });
             }
             //Handle !nextTournaments
-            if( message.text.indexOf("!nextTournaments") !== -1 ){
-                // var channel = that.getNameById(message.channel);
-
+            if( message.text.toLowerCase().indexOf("!nexttournaments") !== -1 ){
                 events.getNextTournaments(3,function(error,response){
                     if(error){
                         console.error(error);
@@ -66,9 +79,7 @@ class Oswald extends Bot {
                 });
             }
             //Handle !nextTournament
-            else if( message.text.indexOf("!nextTournament") !== -1 ){
-                // var channel = that.getNameById(message.channel);
-
+            else if( message.text.toLowerCase().indexOf("!nexttournament") !== -1 ){
                 events.getNextTournaments(1,function(error,response){
                     if(error){
                         console.error(error);
@@ -78,11 +89,22 @@ class Oswald extends Bot {
             }
             //Check if the message was directed at the bot
             if( message.text.indexOf("<@"+this.self.id+">") !== -1 ){
+                //Message without @username
+                var messageText = message.text.split( "<@"+this.self.id+">" )[1].toLowerCase();
+                //messageText without spaces
+                var messageTextNoSpaces = messageText.replace(/ /g,'');
                 //If the user asks for a definition
-                if( new RegExp("/|define |def |dict |dictionary |what is |who is |what are |whats a |/").test(message.text) ){
+                if( new RegExp("/|define |def |dict |dictionary |what is |who is |what are |whats a |/").test(messageText) ){
                     this.postMessage(message.channel,dictionaryParser.parseString(message.text),{as_user: true});
                 }
-
+                //If the user has asked for a help menu
+                if( messageTextNoSpaces == "help" ){
+                    this.postMessage(message.channel,helpMessage,{as_user: true});
+                }
+                //If the user has asked for the source code
+                if( messageTextNoSpaces == "source" ||  messageTextNoSpaces == "sourcecode" || messageTextNoSpaces == "code" ){
+                    this.postMessage(message.channel,"https://github.com/JonahMania/Oswald",{as_user: true});
+                }
             }
         }
     }
