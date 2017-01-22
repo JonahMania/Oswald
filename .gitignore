@@ -5,3 +5,5 @@ npm-debug.log
 credentials/calendar-nodejs.json
 credentials/client_secret.json
 credentials/slackToken.json
+databases
+test.js
