@@ -5,13 +5,13 @@ const events = require("./events");
 const throwCounter = require("./throwCounter");
 
 const helpMessage = "commands\n\
-!nextTournament \n\
+@oswald next tournament \n\
 displays the next tournament \n\
-!nextTournaments \n\
+@oswald next tournaments \n\
 displays the next three tournaments \n\
-!nextPractice \n\
+@oswald next practice \n\
 displays the next practice \n\
-!nextPractices \n\
+@oswald next practices \n\
 displays the next three practices \n\
 @oswald define [keyword]\n\
 displays the definition of the requested word \n\
@@ -58,52 +58,59 @@ class Oswald extends Bot {
 
         //Check that we are getting a chat message
         if( message.type === 'message' && Boolean(message.text) && typeof message.channel === 'string' && message.user !== this.self.id ){
-            //Handle !nextPractices
-            if( message.text.toLowerCase().indexOf("!nextpractices") !== -1 ){
-                events.getNextPractices(3,function(error,response){
-                    if(error){
-                        console.error(error);
-                    }
-                    that.postMessage(message.channel,response,{as_user: true});
-                });
-            }
-            //Handle !nextPractice
-            else if( message.text.toLowerCase().indexOf("!nextpractice") !== -1 ){
-                events.getNextPractices(1,function(error,response){
-                    if(error){
-                        console.error(error);
-                    }
-                    that.postMessage(message.channel,response,{as_user: true});
-                });
-            }
-            //Handle !nextTournaments
-            if( message.text.toLowerCase().indexOf("!nexttournaments") !== -1 ){
-                events.getNextTournaments(3,function(error,response){
-                    if(error){
-                        console.error(error);
-                    }
-                    that.postMessage(message.channel,response,{as_user: true});
-                });
-            }
-            //Handle !nextTournament
-            else if( message.text.toLowerCase().indexOf("!nexttournament") !== -1 ){
-                events.getNextTournaments(1,function(error,response){
-                    if(error){
-                        console.error(error);
-                    }
-                    that.postMessage(message.channel,response,{as_user: true});
-                });
-            }
             //Check if the message was directed at the bot
             if( message.text.indexOf("<@"+this.self.id+">") !== -1 ){
                 //Message without @username
                 var messageText = message.text.split( "<@"+this.self.id+">" )[1].toLowerCase();
                 //messageText without spaces
                 var messageTextNoSpaces = messageText.replace(/ /g,'');
+                
+                //If the user wants the next practice
+                if( new RegExp("/|nextpractices|/").test(messageTextNoSpaces) ){
+                    events.getNextPractices( 3, function( error, response ){
+                        if( error ){
+                            console.error( error );
+                        }else{
+                            that.postMessage( message.channel, response, {as_user: true} );
+                        }
+                    });
+                } 
+                else if( new RegExp("/|nextpractice|/").test(messageTextNoSpaces) ){
+                    events.getNextPractices( 1, function( error, response ){
+                        if( error ){
+                            console.error( error );
+                        }else{
+                            that.postMessage( message.channel, response, {as_user: true} );
+                        }
+                    });
+                } 
+
+                //If the user wants the next tournament
+                if( new RegExp("/|nexttournaments|/").test(messageTextNoSpaces) ){
+                    events.getNextTournaments( 3, function( error, response ){
+                        if( error ){
+                            console.error( error );
+                        }else{
+                            that.postMessage( message.channel, response, {as_user: true} );
+                        }
+                    });
+                } 
+                else if( new RegExp("/|nexttournament|/").test(messageTextNoSpaces) ){
+                    events.getNextTournaments( 1, function( error, response ){
+                        if( error ){
+                            console.error( error );
+                        }else{
+                            that.postMessage( message.channel, response, {as_user: true} );
+                        }
+                    });
+                } 
+
+
                 //If the user asks for a definition
                 if( new RegExp("/|define |def |dict |dictionary |what is |who is |what are |whats a |/").test(messageText) ){
                     this.postMessage(message.channel,dictionaryParser.parseString(message.text),{as_user: true});
                 }
+                
                 //If the user wants to add throws
                 if( new RegExp("/|throws add |throws +|/").test(messageText) ){
                     //Get string after the command
@@ -124,10 +131,12 @@ class Oswald extends Bot {
                         });
                     }
                 }
+                
                 //If the user has asked for a help menu
                 if( messageTextNoSpaces == "help" ){
                     this.postMessage(message.channel,helpMessage,{as_user: true});
                 }
+                
                 //If the user has asked for the source code
                 if( messageTextNoSpaces == "source" ||  messageTextNoSpaces == "sourcecode" || messageTextNoSpaces == "code" ){
                     this.postMessage(message.channel,"https://github.com/JonahMania/Oswald",{as_user: true});
