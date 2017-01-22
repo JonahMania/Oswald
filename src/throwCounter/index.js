@@ -8,6 +8,14 @@ const playerDatabase = require("../database/playerDatabase");
 * return the number of new throws
 */
 function addThrows( playerName, numThrows, callback ){
+    if( !playerName ){
+        callback("Error: Must pass player name", null);
+        return;
+    }
+    if( !numThrows || typeof numThrows != "number" ){
+        callback("Error: Must pass a number as numThrows" );
+        return;
+    }
     playerDatabase.getPlayerByName( playerName, function( error, players ){
         if( error ){
             callback( error, null );

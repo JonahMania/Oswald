@@ -2,6 +2,7 @@ const Bot = require("slackbots");
 const util = require('util');
 const dictionaryParser = require("./dictionary/dictionaryParser");
 const events = require("./events");
+const throwCounter = require("./throwCounter");
 
 const helpMessage = "commands\n\
 !nextTournament \n\
@@ -49,6 +50,12 @@ class Oswald extends Bot {
     */
     onMessage( message ){
         var that = this;
+        //Get data for the user that sent the message
+        var userFrom = this.users.filter( function( obj ){
+            return obj.id == message.user;
+        });
+        userFrom = userFrom[0];
+
         //Check that we are getting a chat message
         if( message.type === 'message' && Boolean(message.text) && typeof message.channel === 'string' && message.user !== this.self.id ){
             //Handle !nextPractices
@@ -96,6 +103,26 @@ class Oswald extends Bot {
                 //If the user asks for a definition
                 if( new RegExp("/|define |def |dict |dictionary |what is |who is |what are |whats a |/").test(messageText) ){
                     this.postMessage(message.channel,dictionaryParser.parseString(message.text),{as_user: true});
+                }
+                //If the user wants to add throws
+                if( new RegExp("/|throws add |throws +|/").test(messageText) ){
+                    //Get string after the command
+                    var args = messageText.split( "throws" )[1];
+                    //Get all numbers from text
+                    var numArray = messageText.match(/\d+/);
+                    //Get number of throws from text
+                    if( numArray != null ){
+                        var numThrows = Number(numArray[0]);
+                        throwCounter.addThrows( userFrom.id, numThrows, function( error, newThrowTotal ){
+                            if( error ){
+                                console.error( error );
+                            }else{
+                                var responseMsg = "Added "+numThrows+" throws to user "+userFrom.name+"\n "+
+                                    userFrom.name+" now has a total of "+newThrowTotal+" throws";
+                                that.postMessage(message.channel, responseMsg, {as_user: true});
+                            }
+                        });
+                    }
                 }
                 //If the user has asked for a help menu
                 if( messageTextNoSpaces == "help" ){
