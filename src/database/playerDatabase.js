@@ -87,7 +87,7 @@ function getLineThrows( callback ){
         }
         //Sort by throws
         lineThrowsArray.sort( function( a, b ){
-            return a > b;
+            return a.throws < b.throws;
         });
         callback( null, lineThrowsArray );     
     });
