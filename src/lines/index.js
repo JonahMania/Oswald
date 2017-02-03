@@ -8,8 +8,8 @@ const lines = require( "./lines" );
  * @param {function} callback Function to fire when change is complete
  */
 function joinLine( playerName, line, callback ){
-    //Check arguments
     var i = -1;
+    //Check arguments
     if( !playerName ){
         callback( "Error: Must pass player name", null );
         return;
@@ -19,12 +19,13 @@ function joinLine( playerName, line, callback ){
         return;
     }
 
-    for (var j in lines)
+    for( var j in lines )
     {
         if (lines[j].keywords.indexOf(line) >= 0) {
             i = j;
         }
     }
+
     if( i == -1) {//lines[i].keywords.indexOf( line ) < 0 ){
         callback( null, ', I could not find a line named "' + line + '"' );
         return;
@@ -63,7 +64,7 @@ function joinLine( playerName, line, callback ){
                     callback( error, null );
                     return;
                 }
-                var response = " has joined line " + i.line;
+                var response = " has joined line " + line;
                 callback( null, response );
             });
         }
