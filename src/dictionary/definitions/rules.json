@@ -1,0 +1,142 @@
+[
+    {
+        "word":"Best Perspective",
+        "keywords":["best perspective"],
+        "desc":"The most complete view available by a player that includes the relative positions of the disc, ground, players, and line markers involved in a play. On an unlined field, this may require sighting from one field marker to another."
+    },
+    {
+        "word":"Completed Pass",
+        "keywords":["completed pass"],
+        "desc":"Any catch that results in the team in possession of the disc retaining possession. Any pass that is not complete is incomplete."
+    },
+    {
+        "word":"Defensive Player",
+        "keywords":["defensive player"],
+        "desc":"A player whose team is not in possession of the disc. A defensive player may not pick up a live disc or a disc in play or call for a pass from the thrower."
+    },
+    {
+        "word":"Foul or Non-incidental Contact",
+        "keywords":["non-incidental contact","non incidental contact","foul","fouls"],
+        "desc":"Contact between opposing players. In general, the player initiating the contact has committed the foul."
+    },
+    {
+        "word":"Ground Contact",
+        "keywords":["ground contact"],
+        "desc":"All player contact with the ground directly related to a specific event or maneuver (e.g., jumping, diving, leaning or falling), including landing or recovering after being off-balance. Items on the ground are considered part of the ground."
+    },
+    {
+        "word":"Guarding",
+        "keywords":["guarding"],
+        "desc":"A defender is guarding an offensive player when they are within three meters of that offensive player and are reacting to that offensive player. A defender who turns away from an offensive player and begins focusing on and reacting to the thrower is no longer guarding that offensive player."
+    },
+    {
+        "word":"Incidental Contact",
+        "keywords":["incidental contact"],
+        "desc":"Contact between opposing players that does not affect continued play. For example, contact affects continued play if the contact knocks a player off-balance and interferes with his ability to continue cutting or playing defense."
+    },
+    {
+        "word":"line",
+        "keywords":["line"],
+        "desc":"A boundary defining the playing areas. On an unlined field, the boundary is an imaginary line segment between two field markers with the thickness of said markers. Line segments are not extrapolated beyond the defining markers."
+    },
+    {
+        "word":"Marker",
+        "keywords":["marker","defender"],
+        "desc":"The defensive player within three meters of the thrower's pivot or of the thrower if no pivot has been established. If the disc is not in play, a defensive player within three meters of a spot on the field where the disc is to be put into play is considered the marker."
+    },
+    {
+        "word":"Pivot",
+        "keywords":["pivot"],
+        "desc":"The particular part of the body in continuous contact with a single spot on the field during a thrower's possession once the thrower has come to a stop or has attempted a throw or fake. When there is a definitive spot for putting the disc into play, the part of the body in contact with that spot is the pivot."
+    },
+    {
+        "word":"Possession of the disc",
+        "keywords":["possession"],
+        "desc":"Sustained contact with, and control of, a non-spinning disc.\n1. Catching a pass is equivalent to establishing possession of that pass.\n2. Loss of possession due to ground contact related to a catch negates that player's possession up to that point.\n3. A disc in a player's possession is considered part of that player.\n4. The team whose player is in possession, or whose players may pick up the disc, is considered the team in possession. If the disc is in the air following a legal pass, the thrower's team is considered the team in possession."
+    },
+    {
+        "word":"Pull",
+        "keywords":["pull"],
+        "desc":"The throw from one team to the other that starts play at the beginning of a half or after a goal. It is not a legal pass for scoring and has many special provisions. The player on the pulling team who possesses the disc and signals readiness is the puller."
+    },
+    {
+        "word":"Stoppage of play",
+        "keywords":["stoppage of play","stop play","play stop","play stoppage"],
+        "desc":"Any halting of play due to a call, discussion, or time-out that requires a check or self-check to restart play. The term play stops means a stoppage of play occurs."
+    },
+    {
+        "word":"Violation",
+        "keywords":["violation"],
+        "desc":"Any infraction of the rules other than a foul."
+    },
+    {
+        "word": "Fast count",
+            "keywords": ["fast count"],
+            "desc": "If the marker does not say “stalling” to initiate or resume a stall count, counts at intervalsof less than one second, or skips a number in the count, it is a fast count."
+    }, 
+    {
+        "word": "Double-team",
+        "keywords": ["double team", "double-team"],
+        "desc": "If a defensive player other than the marker is within three meters of any pivot of the thrower without also being within three meters of and guarding (II.G) another offensive player, it is a double team. However, merely running across this area is not a double team."
+    },
+    {
+        "word": "Disc-space",
+        "keywords": ["disc-space", "disc space"],
+        "desc": "If a line between any two points on the marker touches the thrower or is less than one disc diameter away from the torso or pivot of the thrower, it is a disc space violation. However, if this situation is caused solely by movement of the thrower, it is not a violation"
+    },
+    {
+        "word": "Vision blocking",
+        "keywords": ["vision blocking"],
+        "desc": "If the marker deliberately blocks the thrower's vision, it is a vision blocking violation."
+    },
+    {
+        "word": "Strip",
+        "keywords": ["strip"],
+        "desc": "If a defensive player initiates contact with the disc after an offensive player has gained possession of the disc, and the offensive player loses possession as a result, it is a strip. A strip is a subset of fouls and is treated the same way."
+    },
+    {
+        "word": "Pick",
+        "keywords": ["pick"],
+        "desc": "A pick occurs whenever an offensive player moves in a manner that causes a defensive player guarding (II.G) an offensive player to be obstructed by another player. Obstruction may result from contact with, or the need to avoid, the obstructing player."
+    },
+    {
+        "word": "Travel",
+        "keywords": ["travel", "traveling"],
+        "desc": "The thrower must establish a pivot at the appropriate spot on the field and keep all or part of the pivot in contact with that spot until the throw is released. Failure to do so is a travel and results in a stoppage of play and a check."
+    },
+    {
+        "word": "Point cap",
+        "keywords": ["point cap"],
+        "desc": "A point cap is a maximum score limit imposed before the event."
+    },
+    {
+        "word": "Soft time cap",
+        "keywords": ["soft time cap", "soft cap"],
+        "desc": "A soft time cap is a maximum score limit imposed during a game once a predetermined time of play has elapsed and after the current scoring attempt is completed."
+    },
+    {
+        "word": "Hard time cap",
+        "keywords": ["hard time cap", "hard cap"],
+        "desc": "A hard time cap is the ending of the game once a predetermined time of play has elapsed and after the current scoring attempt is completed. If the score is tied, play continues until one additional goal is scored."
+    },
+    {
+        "word": "Halftime",
+        "keywords": ["halftime"],
+        "desc": "Halftime begins when one team's score first reaches or exceeds half of the game total, and lasts ten minutes."
+    },
+    {
+        "word": "Overtime",
+        "keywords": ["overtime", "universe", "universe point"],
+        "desc": "Overtime begins when the score is tied at one goal less than the game total (e.g., in a game with a game total of 15 goals, overtime begins when the score reaches 14-14)."
+    },
+    {
+        "word": "Stalling",
+        "keywords": ["stall", "stalling"],
+        "desc": "The period of time within which a thrower must release a throw may be timed by the stall count. The stall count consists of announcing \"stalling\" and counting from one to ten loudly enough for the thrower to hear. If the thrower has not released the disc at the first utterance of the word \"ten\", it is a turnover. The marker loudly announces \"stall\" and play stops. \n\nIf a stall count is interrupted by a call, the thrower and marker are responsible for agreeing on the correct count before the check. \nGeneral Rules: \n1) Uncontested defensive foul or violation: Stall resets to 1. \n2) Uncontested offensive foul or violation: Stall goes to count reached plus 1, or 9 if over 8. \n3) Contested foul or violation: Stall goes to count reached plus 1,or 6 if over 5. \n4) Offsetting calls: Stall goes to count reached plus 1, or 6 if over 5. \n5) Unresolved calls: Stall goes tocount reached plus 1, or 6 if over 5. \nSpecific Rules: \n1) Pick: Stall goes to count reached plus 1, or 6 if over 5. \n2) Marking violation (no stoppage): Stall goes to count reached minus 1. \n3) Contested stall: First call stall goes to 8, second and subsequent calls when due to a fast count stall goes to 6. \nDefensive time out: Stall goes to count reached plus 1, or 6 if over 5. \nOffensive time out: Stall goes to count reached plus 1, or 6 if over 5."
+    },
+    {
+        "word":"Check",
+        "keywords":["check", "self check", "self-check"],
+        "desc":" When play stops, each player must come to a stop as quickly as possible. Before restarting play, all players must assume the location on the field specified by the rule that covers that specific stoppage of play and remain there until play is restarted.  When the situation is resolved, the player determined to be in possession offers the disc to the marker for a check. The marker restarts play by touching the disc in the thrower's possession.\nOffensive Self-Check: If play is to restart with a check, but no defensive player is near enough to touch the disc in the thrower's hand, play restarts with an offensive self-check. To restart play, the thrower establishes a pivot at the appropriate spot on the field, touches the disc to the ground and loudly announces \"in play.\" \nDefensive Self-check: If play is to restart with a check, but no offensive player is in possession of the disc at the appropriate spot, play restarts with a defensive self-check. To restart play the disc is placed at the appropriate spot on the field, the defender closest to the disc loudly announces \"in play.\""
+}
+]

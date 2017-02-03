@@ -3,6 +3,8 @@ const util = require('util');
 const dictionaryParser = require("./dictionary/dictionaryParser");
 const events = require("./events");
 const throwCounter = require("./throwCounter");
+const cronJob = require('cron').CronJob;
+const lines = require("./lines");
 
 const helpMessage = "commands\n\
 @oswald next tournament \n\
@@ -13,8 +15,10 @@ displays the next three tournaments \n\
 displays the next practice \n\
 @oswald next practices \n\
 displays the next three practices \n\
-@oswald define [keyword]\n\
+@oswald define [keyword] \n\
 displays the definition of the requested word \n\
+@oswald throws \n\
+displays your current throw count. Use @oswald [add/sub] throws [number] to add or remove throws for the weeks\n\
 @oswald help \n\
 displays this message \n\
 @oswald source \n\
@@ -22,7 +26,6 @@ displays a link to my source code \n\
 \n\
 If you find any bugs or wish to improve the bot please contact Jonah Mania or Keyur Ved\n\
 ";
-
 class Oswald extends Bot {
     /**
     * Constructor
@@ -36,10 +39,28 @@ class Oswald extends Bot {
     * Function to start the bot
     */
     run(){
+        var that = this;
         console.log("Starting oswald");
         //Set function to run when a message is read
         this.on('message', this.onMessage);
         this.startupMessage();
+        //Job to run every week and notify of top players
+        var job = new cronJob( '00 59 23 * * 0', function(){
+            throwCounter.announceTopPlayers(that.getUsers()._value.members, function(error,response){
+                if( error ){
+                    console.error( error );
+                }else{
+                    that.postMessage( "ducks", response, {as_user: true } );
+                }   
+            });
+        });
+
+        job.start();
+        if( job.running ){  
+            console.log( "Job to post throw winners is running" );
+        }else{
+            console.log( "Error: Job to post throw winners failed" );
+        }
     }
     startupMessage(){
         this.postMessageToGroup("development","Starting Bot",{as_user: true});
@@ -112,26 +133,91 @@ class Oswald extends Bot {
                 }
                 
                 //If the user wants to add throws
-                if( new RegExp("/|throws add |throws +|/").test(messageText) ){
-                    //Get string after the command
-                    var args = messageText.split( "throws" )[1];
+                if( new RegExp("/|addthrows|/").test(messageTextNoSpaces) ){
                     //Get all numbers from text
                     var numArray = messageText.match(/\d+/);
                     //Get number of throws from text
                     if( numArray != null ){
                         var numThrows = Number(numArray[0]);
-                        throwCounter.addThrows( userFrom.id, numThrows, function( error, newThrowTotal ){
+                        throwCounter.addThrows( userFrom.id, numThrows, function( error, response ){
                             if( error ){
                                 console.error( error );
                             }else{
-                                var responseMsg = "Added "+numThrows+" throws to user "+userFrom.name+"\n "+
-                                    userFrom.name+" now has a total of "+newThrowTotal+" throws";
-                                that.postMessage(message.channel, responseMsg, {as_user: true});
+                                that.postMessage(message.channel, userFrom.name+response, {as_user: true});
                             }
                         });
                     }
                 }
-                
+                //If the user wants to subtract throws
+                else if( new RegExp("/|subthrows|subtractthrows|/").test(messageTextNoSpaces) ){
+                    //Get all numbers from text
+                    var numArray = messageText.match(/\d+/);
+                    //Get number of throws from text
+                    if( numArray != null ){
+                        var numThrows = Number(numArray[0]);
+                        throwCounter.addThrows( userFrom.id, numThrows*-1, function( error, response ){
+                            if( error ){
+                                console.error( error );
+                            }else{
+                                that.postMessage(message.channel, userFrom.name+response, {as_user: true});
+                            }
+                        });
+                    }
+                }
+                //If the user wants to get the top throwers
+                else if( new RegExp("/|topthrows|throwsleaderboard|throwsleaders|/").test( messageTextNoSpaces )){
+                    throwCounter.getTopPlayers(that.users, function(error,response){
+                        if( error ){
+                            console.error( error );
+                        }else{
+                            that.postMessage( message.channel, response, {as_user: true } );
+                        }   
+                    });
+                }
+                //If the user wants to get there throw count
+                else if( new RegExp("/|throws|/").test(messageText) ){
+                    throwCounter.getThrows( userFrom.id, function( error, response ){
+                            if( error ){
+                                console.error( error );
+                                return;
+                            }
+                            that.postMessage(message.channel, userFrom.name+response, {as_user: true});
+                    });  
+                }
+                //If the user wants to join a line
+                if( new RegExp("/|joinline|/").test( messageTextNoSpaces ) ){
+                    //Get line to join
+                    var args = messageTextNoSpaces.split( "line" )[1];
+                    if( args ){
+                        lines.joinLine( userFrom.id, args, function( error, response ){
+                            if( error ){
+                                console.error( error );
+                                return;
+                            }
+                            that.postMessage( message.channel, userFrom.name+response, {as_user: true });
+                        });
+                    }
+                    
+                }
+                //If the user wants to see his/her line
+                else if( messageTextNoSpaces == "line" ){
+                    lines.getLine( userFrom.id, function( error, response ){
+                        if( error ){
+                            console.error( error );
+                            return;
+                        }
+                        that.postMessage( message.channel, userFrom.name+response, {as_user: true});
+                    });
+                }
+                //If the user wants to get all the players from a line
+                else if( new RegExp( "/|line|/" ).test( messageTextNoSpaces ) ){
+                    var args = messageTextNoSpaces.split( "line" )[0];
+                    if( args ){
+                        lines.getLinePlayers( args, that.users, function( error, response ){
+                            that.postMessage( message.channel, response, {as_user: true} );
+                        });
+                    }
+                }
                 //If the user has asked for a help menu
                 if( messageTextNoSpaces == "help" ){
                     this.postMessage(message.channel,helpMessage,{as_user: true});

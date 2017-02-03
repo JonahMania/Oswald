@@ -7,3 +7,4 @@ credentials/client_secret.json
 credentials/slackToken.json
 databases
 test.js
+src/dictionary/definitions/hidden.json
