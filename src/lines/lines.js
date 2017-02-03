@@ -3,6 +3,7 @@ module.exports = [
     "blue",
     "white",
     "pesto",
+    "madanad",
     "none"
 ];
 
