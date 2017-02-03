@@ -1,9 +1,21 @@
 module.exports = [
-    "red",
-    "blue",
-    "white",
-    "pesto",
-    "madanad",
-    "none"
+    { "line": "red",
+        "keywords": ["red", "brown"]
+    },
+    { "line": "blue",
+        "keywords": ["blue"]
+    },
+    { "line": "white",
+        "keywords": ["white"]
+    },
+    { "line": "pesto",
+        "keywords": ["pesto"]
+    },
+    { "line": "madanad",
+        "keywords": ["madanad, madinad"]
+    },
+    { "line": "none",
+        "keywords": ["none"]
+    }
 ];
 
