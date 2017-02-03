@@ -1,6 +1,6 @@
 module.exports = [
     { "line": "red",
-        "keywords": ["red", "brown"]
+        "keywords": ["red", "brown", "jonah's line"]
     },
     { "line": "blue",
         "keywords": ["blue"]
