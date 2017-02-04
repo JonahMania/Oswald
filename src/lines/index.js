@@ -42,7 +42,7 @@ function joinLine( playerName, line, callback ){
         if( players.length == 0 ){
             //No player in database so add him
             player = {
-                name: playerName,
+                _id: playerName,
                 line: lines[i].line
             }
             //Insert Player
@@ -135,7 +135,7 @@ function getLinePlayers( line, users, callback ){
         //Add the names of each player
         players.forEach( function( player ){
             currUser = users.filter( function( obj ){
-                return obj.id == player.name;
+                return obj.id == player._id;
             });
             if( currUser.length > 0 ){
                 currUser = currUser[0];

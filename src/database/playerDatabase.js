@@ -15,7 +15,7 @@ function insertPlayer( player, callback ){
 * @param {function} callback function to fire when player is found
 */
 function getPlayerByName( playerName, callback ){
-    db.find( { name: playerName }, callback );
+    db.find( { _id: playerName }, callback );
 }
 
 /**
@@ -25,7 +25,48 @@ function getPlayerByName( playerName, callback ){
 * @param {function} callback function to fire when update is complete
 */
 function updatePlayer( playerName, player, callback ){
-    db.update( { name: playerName }, player, { returnUpdatedDocs: true }, callback );
+    db.update( { _id: playerName }, { $set: player}, { returnUpdatedDocs: true }, callback );
+}
+
+/**
+* Updates throws in the database
+* @param {string} playerName
+* @param {string} year
+* @param {string} week
+* @param {int} throws
+* @param {int} totalThrows
+* @param {function} callback
+*/
+function updateThrows( playerName, year, week, throws, totalThrows, callback ){
+    //Check arguments
+    if( !playerName || typeof playerName !== "string" ){
+        callback( "Error: Need to pass playerName as string", null );
+        return; 
+    }
+        
+    if( !year || typeof year !== "string" ){
+        callback( "Error: Need to pass year as string", null );
+        return;
+    }
+
+    if( !week || typeof week !== "string" ){
+        callback( "Error: Need to pass week as string", null );
+        return;
+    }
+
+    if( !throws || typeof throws !== "number" ){
+        callback( "Error: Need to pass throws as number", null );
+        return;
+    }
+
+    if( !totalThrows || typeof totalThrows !== "number" ){
+        callback( "Error: Need to pass totalThrows as number", null );
+        return;
+    }
+
+    var search = "throws."+year+"."+week; 
+    //Update doc
+    db.update( { _id: playerName }, { $set: { [search]: throws, "throws.total": totalThrows } }, { returnUpdatedDocs: true }, callback );  
 }
 
 /**
@@ -33,7 +74,7 @@ function updatePlayer( playerName, player, callback ){
 * @param {function} callback function to fire when players are found
 */
 function getTopTotalThrows( callback ){
-    db.find({}).sort({ throws: -1 }).limit(3).exec(callback);
+    db.find({}).sort({ "throws.total": -1 }).limit(3).exec(callback);
 }
 
 /**
@@ -95,6 +136,7 @@ function getLineThrows( callback ){
 module.exports.insertPlayer = insertPlayer;
 module.exports.getPlayerByName = getPlayerByName;
 module.exports.updatePlayer = updatePlayer;
+module.exports.updateThrows = updateThrows;
 module.exports.getTopTotalThrows = getTopTotalThrows;
 module.exports.getTopWeekThrows = getTopWeekThrows;
 module.exports.getLinePlayers = getLinePlayers;
