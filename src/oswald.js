@@ -222,7 +222,7 @@ class Oswald extends Bot {
                 if( messageTextNoSpaces == "help" ){
                     this.postMessage(message.channel,helpMessage,{as_user: true});
                 }
-                if ( new RegExp("google drive").test(messageText) ) {
+                if ( new RegExp("googledrive").test(messageTextNoSpaces) ) {
                     this.postMessage(message.channel, "https://drive.google.com/open?id=0B1ui18qNXOgkSUd5ZnlPUnhSZkU", {as_user: true});
                 }
                 
