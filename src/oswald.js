@@ -231,7 +231,6 @@ class Oswald extends Bot {
                     this.postMessage(message.channel,"https://github.com/JonahMania/Oswald",{as_user: true});
                 }
             } else {
-                console.log(message);
                 var messageLowerCase = message.text.toLowerCase();
 
                 if ( new RegExp("@(saisai|psipsi)").test(messageLowerCase)) {
@@ -241,7 +240,6 @@ class Oswald extends Bot {
                     for (var i = 0; i < users.length; i++) {
                         str += "<@" + users[i].id + "> ";
                     }
-                    console.log(users);
                     this.postMessage(message.channel, str, {as_user: true});
                 }
             }
