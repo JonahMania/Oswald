@@ -1,20 +1,26 @@
 module.exports = [
-    { "line": "red",
+    {   
+        "line": "red",
         "keywords": ["red", "brown", "jonah's line"]
     },
-    { "line": "blue",
+    { 
+        "line": "blue",
         "keywords": ["blue"]
     },
-    { "line": "white",
+    { 
+        "line": "white",
         "keywords": ["white"]
     },
-    { "line": "pesto",
+    { 
+        "line": "pesto",
         "keywords": ["pesto"]
     },
-    { "line": "madanad",
-        "keywords": ["madanad, madinad"]
+    {   
+        "line": "madanad",
+        "keywords": ["madanad", "madinad"]
     },
-    { "line": "none",
+    { 
+        "line": "none",
         "keywords": ["none"]
     }
 ];

@@ -32,7 +32,7 @@ function addThrows( playerName, numThrows, callback ){
         }else if( players.length == 0 ){
             //If there are no players in the database with this name insert one
             var player = {
-                name: playerName,
+                _id: playerName,
                 throws: {
                     total:numThrows
                 }
@@ -58,36 +58,34 @@ function addThrows( playerName, numThrows, callback ){
         }else{
             //If the player does exist update it
             var player = players[0];
-            //Add throws to player object
-            if( !player.throws ){
-                player.throws = {};
-            }
-            if( !player.throws[year] ){
-                player.throws[year] = {};
-            }
-            if( !player.throws[year][week] ){
-                player.throws[year][week] = numThrows;
-            }else{
-                player.throws[year][week] += numThrows;
-            }
-            if( !player.throws.total ){
-                player.throws.total = 0;
-            }
+            var currThrows = 0;
+            var currTotal = 0;
 
-            if( player.throws[year][week] < 0 ){
-                //If the player now has less then 0 throws make the player have 0 throws for the week and subtract from total
-                var overflow = Math.abs(numThrows) + player.throws.weeks[week];
-                player.throws[year][week] = 0;
-                player.throws.total -= overflow;
-            }else{
-                player.throws.total += numThrows;
+            if( player.throws && player.throws[year] && player.throws[year][week] ){
+                currThrows = player.throws[year][week];
             }
-            if( player.throws.total < 0 ){
-                player.throws.total = 0;
+            
+            if( player.throws && player.throws.total ){
+                currTotal = player.throws.total;
+            }
+   
+            currThrows += numThrows;
+ 
+            if( currThrows < 0 ){
+                //If the player now has less then 0 throws make the player have 0 throws for the week and subtract from total
+                var overflow = Math.abs(numThrows) + currThrows;
+                currThrows = 0;
+                currTotal -= overflow;
+            }else{
+                currTotal += numThrows;
+            }
+            //Make sure the total is not less then 0
+            if( currTotal < 0 ){
+                currTotal = 0;
             }
             
             //Update player in database
-            playerDatabase.updatePlayer( playerName, player, function( error, numAffected, newPlayer ){
+            playerDatabase.updateThrows( playerName, year, week, currThrows, currTotal, function( error, numAffected, newPlayer ){
                 if( error ){
                     callback( error, null );   
                 }else{
@@ -176,7 +174,7 @@ function getTopPlayers(users, callback){
                 }               
                 weekDocs.forEach(function( player, i ){
                     var user = users.filter(function( obj ){
-                        return obj.id == player.name;
+                        return obj.id == player._id;
                     });
                     if( user.length < 1 ){
                         return;
@@ -192,7 +190,7 @@ function getTopPlayers(users, callback){
                 }
                 docs.forEach(function( player, i ){
                     var user = users.filter(function( obj ){
-                        return obj.id == player.name;
+                        return obj.id == player._id;
                     });
                     if( user.length < 1 ){
                         return;
@@ -234,7 +232,7 @@ function announceTopPlayers(users,callback){
             message += "\n\nThrow Champions for the Week";   
             weekDocs.forEach(function( player, i ){
                 var user = users.filter(function( obj ){
-                    return obj.id == player.name;
+                    return obj.id == player._id;
                 });
                 if( user.length < 1 ){
                     return;
