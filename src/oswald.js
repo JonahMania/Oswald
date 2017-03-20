@@ -227,8 +227,39 @@ class Oswald extends Bot {
                 if( messageTextNoSpaces == "source" ||  messageTextNoSpaces == "sourcecode" || messageTextNoSpaces == "code" ){
                     this.postMessage(message.channel,"https://github.com/JonahMania/Oswald",{as_user: true});
                 }
+            } else {
+                console.log(message);
+                var messageLowerCase = message.text.toLowerCase();
+
+                if ( new RegExp("@(saisai|psipsi)").test(messageLowerCase)) {
+                    var users = this.getSaiSaiUsers();
+                    var str = "";
+
+                    for (var i = 0; i < users.length; i++) {
+                        str += "<@" + users[i].id + "> ";
+                    }
+                    console.log(users);
+                    this.postMessage(message.channel, str, {as_user: true});
+                }
             }
         }
+    }
+
+    getSaiSaiUsers() {
+        var ret = [];
+        ret.push(this.findUserByName("elmo"));
+        ret.push(this.findUserByName("tjthepianoman"));
+        ret.push(this.findUserByName("cutty"));
+        ret.push(this.findUserByName("bobkov"));
+        ret.push(this.findUserByName("dad"));
+        ret.push(this.findUserByName("tony_white"));
+        
+        return ret;
+    }
+    findUserByName(name) {
+        return this.users.filter(function(obj) {
+            return obj.name == name;
+        })[0];
     }
 }
 
