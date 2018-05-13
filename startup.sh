@@ -1,6 +1,5 @@
 #!/bin/bash
-
+cd ~/Oswald
 git pull origin master
-yum update -y
-sudo su
+screen node app.js
 node app.js
