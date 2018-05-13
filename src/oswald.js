@@ -24,7 +24,7 @@ displays this message \n\
 @oswald source \n\
 displays a link to my source code \n\
 \n\
-If you find any bugs or wish to improve the bot please contact Jonah Mania or Keyur Ved\n\
+If you find any bugs or wish to improve the bot please contact Joshua Schmidt\n\
 ";
 class Oswald extends Bot {
     /**
