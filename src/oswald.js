@@ -5,7 +5,7 @@ const events = require("./events");
 const throwCounter = require("./throwCounter");
 const cronJob = require('cron').CronJob;
 const lines = require("./lines");
-const weather = require("./weather")
+const weather = require("./weather");
 
 const helpMessage = "commands\n\
 @oswald next tournament \n\
