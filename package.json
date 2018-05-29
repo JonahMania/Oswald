@@ -1,6 +1,6 @@
 {
   "name": "oswald",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A slackbot for Stevens Ultimate",
   "main": "app.js",
   "scripts": {
@@ -16,8 +16,8 @@
     "googleapis": "^15.1.0",
     "moment": "^2.22.1",
     "nedb": "^1.8.0",
-    "slackbots": "^1.1.0",
-    "version": "1.0.0",
+    "slackbots": "^1.1.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jonahmania/oswald.git"
@@ -26,5 +26,7 @@
   "bugs": {
     "url": "https://github.com/jonahmania/oswald/issues"
   },
-  "homepage": "https://github.com/jonahmania/oswald#readme",
+  "homepage": {
+    "https://github.com/jonahmania/oswald#readme"
+  }
 }
