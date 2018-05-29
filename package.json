@@ -4,10 +4,11 @@
   "description": "A slackbot for Stevens Ultimate",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "startscript": "./startup.sh"
   },
-  "author": "Jonah Mania",
-  "license": "ISC",
+  "author": "Jonah Mania, Joshua Schmidt",
+  "license": "MIT",
   "dependencies": {
     "cron": "^1.3.0",
     "dateformat": "^2.2.0",
@@ -15,6 +16,15 @@
     "googleapis": "^15.1.0",
     "moment": "^2.22.1",
     "nedb": "^1.8.0",
-    "slackbots": "^1.1.0"
-  }
+    "slackbots": "^1.1.0",
+    "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonahmania/oswald.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonahmania/oswald/issues"
+  },
+  "homepage": "https://github.com/jonahmania/oswald#readme",
 }
