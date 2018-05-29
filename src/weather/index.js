@@ -7,7 +7,7 @@ let request = require('request');
 * arguments error and response
 */
 
-var getWeather = function(option, callback){
+function getWeather(option, callback){
   //Load client secrets from a local file.
   fs.readFile('credentials/weather_secret.json', function processClientSecrets(error, content) {
     if(error){
