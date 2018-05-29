@@ -8,7 +8,7 @@
     "startscript": "./startup.sh"
   },
   "author": "Jonah Mania, Joshua Schmidt",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
     "cron": "^1.3.0",
     "dateformat": "^2.2.0",
@@ -16,17 +16,17 @@
     "googleapis": "^15.1.0",
     "moment": "^2.22.1",
     "nedb": "^1.8.0",
+    "request": "^2.87.0",
     "slackbots": "^1.1.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jonahmania/oswald.git"
   },
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/jonahmania/oswald/issues"
   },
   "homepage": {
-    "https://github.com/jonahmania/oswald#readme"
+    "url": "https://github.com/jonahmania/oswald#readme"
   }
 }
