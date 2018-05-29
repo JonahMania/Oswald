@@ -26,7 +26,7 @@ var getWeather = function(option, callback){
             let weather = JSON.parse(body)
             return weather;
           }
-        }
+        });
       }
       let apiKey = JSON.parse(content)
       if(option == 0){
