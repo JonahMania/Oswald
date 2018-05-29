@@ -5,12 +5,15 @@ const events = require("./events");
 const throwCounter = require("./throwCounter");
 const cronJob = require('cron').CronJob;
 const lines = require("./lines");
+const weather = require("./weather")
 
 const helpMessage = "commands\n\
 @oswald next tournament \n\
 displays the next tournament \n\
 @oswald next tournaments \n\
 displays the next three tournaments \n\
+@oswald weather \n\
+displays weather for today. Use @oswald weather [today/tomorrow/week] to see future weather forecasts\n\
 @oswald next practice \n\
 displays the next practice \n\
 @oswald next practices \n\
@@ -217,6 +220,36 @@ class Oswald extends Bot {
                             that.postMessage( message.channel, response, {as_user: true} );
                         });
                     }
+                }
+                //If the user wants to see the weather for today:
+                if(new RegExp("/|weathertoday|weather|/").test(messageTextNoSpaces)){
+                    weather.getWeather( 0, function( error, response ){
+                        if(error){
+                            console.error( error );
+                        }else{
+                            that.postMessage(message.channel, response, {as_user: true});
+                        }
+                    });
+                }
+                //if the user wants to see tomorrow's weather:
+                else if(new RegExp("/|weathertomorrow|/").test(messageTextNoSpaces)){
+                    weather.getWeather(1, function(error, response){
+                        if(error){
+                            console.error(error);
+                        }else{
+                            that.postMessage(message.channel, response, {as_user: true});
+                        }
+                    });
+                }
+                //if the user wants to see the week's weather:
+                else if(new RegExp("/|weatherweek|weatherthisweek|/").test(messageTextNoSpaces)){
+                    weather.getWeather(2, function(error, response){
+                        if(error){
+                            console.error(error);
+                        }else{
+                            that.postMessage(message.channel, response, {as_user: true});
+                        }
+                    });
                 }
                 //If the user has asked for a help menu
                 if( messageTextNoSpaces == "help" ){
