@@ -30,4 +30,4 @@ use that to start the script when entering terminal (I tried using cronjob but i
 * `0 * * * * su -s /bin/sh root -c 'cd /home/joshuatorwebsite/torwebsite && git pull origin master'`
 * every minute:
 * `*/1 * * * *`
-* `0 * * * * su -s /bin/sh root -c 'cd /home/stevensultimateducks/Oswald && git pull origin master'`
+* `0 * * * * su -s /bin/sh root -c 'cd /home/stevensultimateducks/Oswald && git pull origin master && node app.js'`
