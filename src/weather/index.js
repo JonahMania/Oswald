@@ -48,3 +48,5 @@ function getWeather(option, callback){
     }
   });
 }
+
+module.exports.getWeather = getWeather;
