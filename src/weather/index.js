@@ -38,7 +38,7 @@ function getWeather(option, callback){
     else{
       var apiKey = JSON.parse(content).token;
       if(option == 0){
-        let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+        let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`
         request(url, function (err, response, body) {
           let weather = JSON.parse(body);
           let text = "Today: " + weather.weather[0].main + ", temp: " + weather.main.temp + ", wind: " + weather.wind.speed + " (" + weather.wind.deg + " deg)";
@@ -46,7 +46,7 @@ function getWeather(option, callback){
         });
       }
       else if(option == 1){
-        let url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`
+        let url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&appid=${apiKey}`
         request(url, function (err, response, body) {
           let weather = JSON.parse(body);
           let temp = weather.list[1].main.temp;
@@ -57,7 +57,7 @@ function getWeather(option, callback){
       }
       else{
         //7 days, imperial units, by city
-        let url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=${units}`
+        let url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&appid=${apiKey}`
         request(url, function (err, response, body) {
           let weather = JSON.parse(body);
           let temp = []; //5 days, 8 sets of 3 hours per day
