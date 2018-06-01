@@ -16,9 +16,7 @@ Then it should work.
 For AWS setup with nodejs, follow this: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
 please use ubuntu server for AWS - it is so much easier to work with for node and npm
 
-`screen ./startup.sh`
-use that to start the script when entering terminal (I tried using cronjob but it just didn't work for some reason)
-[see this for more details](https://askubuntu.com/questions/8653/how-to-keep-processes-running-after-ending-ssh-session)
+`screen node app.js` [see this for more details](https://askubuntu.com/questions/8653/how-to-keep-processes-running-after-ending-ssh-session)
 ---
 ### cronjobs (automatic updates):
 * install postfix: `sudo apt-get install postfix`
