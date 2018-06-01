@@ -41,7 +41,7 @@ function getWeather(option, callback){
         let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`
         request(url, function (err, response, body) {
           let weather = JSON.parse(body);
-          let text = "Today: " + weather.weather[0].main + ", temp: " + weather.main.temp + ", wind: " + weather.wind.speed + " (" + weather.wind.deg + " deg)";
+          let text = "Today: " + weather.weather[0].main + ", temp: " + weather.main.temp + "F, wind: " + weather.wind.speed + "mph (" + weather.wind.deg + " deg) in " + city + "on avg";
           callback(null, text);
         });
       }
@@ -51,7 +51,7 @@ function getWeather(option, callback){
           let weather = JSON.parse(body);
           let temp = weather.list[1].main.temp;
           let weather_description = weather.list[1].weather[0].description;
-          let text = weekday[date.getDay() + 1] + ": " + weather_description + ", " +  temp + "F";
+          let text = weekday[date.getDay() + 1] + ": " + weather_description + ", " +  temp + "F in " + city + "at 6am";
           callback(null, text);
         });
       }
