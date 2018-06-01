@@ -54,19 +54,19 @@ class Oswald extends Bot {
                     console.error( error );
                 }else{
                     that.postMessage( "ducks", response, {as_user: true } );
-                }   
+                }
             });
         });
 
         job.start();
-        if( job.running ){  
+        if( job.running ){
             console.log( "Job to post throw winners is running" );
         }else{
             console.log( "Error: Job to post throw winners failed" );
         }
     }
     startupMessage(){
-        this.postMessageToGroup("development","Starting Bot",{as_user: true});
+        //this.postMessageToGroup("development","Starting Bot",{as_user: true});
     };
     /**
     * Function to run when a message is recieved
@@ -88,7 +88,7 @@ class Oswald extends Bot {
                 var messageText = message.text.split( "<@"+this.self.id+">" )[1].toLowerCase();
                 //messageText without spaces
                 var messageTextNoSpaces = messageText.replace(/ /g,'');
-                
+
                 //If the user wants the next practice
                 if( new RegExp("/|nextpractices|/").test(messageTextNoSpaces) ){
                     events.getNextPractices( 3, function( error, response ){
@@ -98,7 +98,7 @@ class Oswald extends Bot {
                             that.postMessage( message.channel, response, {as_user: true} );
                         }
                     });
-                } 
+                }
                 else if( new RegExp("/|nextpractice|/").test(messageTextNoSpaces) ){
                     events.getNextPractices( 1, function( error, response ){
                         if( error ){
@@ -107,7 +107,7 @@ class Oswald extends Bot {
                             that.postMessage( message.channel, response, {as_user: true} );
                         }
                     });
-                } 
+                }
 
                 //If the user wants the next tournament
                 if( new RegExp("/|nexttournaments|/").test(messageTextNoSpaces) ){
@@ -118,7 +118,7 @@ class Oswald extends Bot {
                             that.postMessage( message.channel, response, {as_user: true} );
                         }
                     });
-                } 
+                }
                 else if( new RegExp("/|nexttournament|/").test(messageTextNoSpaces) ){
                     events.getNextTournaments( 1, function( error, response ){
                         if( error ){
@@ -127,14 +127,14 @@ class Oswald extends Bot {
                             that.postMessage( message.channel, response, {as_user: true} );
                         }
                     });
-                } 
+                }
 
 
                 //If the user asks for a definition
                 if( new RegExp("/|define |def |dict |dictionary |what is |who is |what are |whats a |/").test(messageText) ){
                     this.postMessage(message.channel,dictionaryParser.parseString(message.text),{as_user: true});
                 }
-                
+
                 //If the user wants to add throws
                 if( new RegExp("/|addthrows|/").test(messageTextNoSpaces) ){
                     //Get all numbers from text
@@ -174,7 +174,7 @@ class Oswald extends Bot {
                             console.error( error );
                         }else{
                             that.postMessage( message.channel, response, {as_user: true } );
-                        }   
+                        }
                     });
                 }
                 //If the user wants to get there throw count
@@ -185,7 +185,7 @@ class Oswald extends Bot {
                                 return;
                             }
                             that.postMessage(message.channel, userFrom.name+response, {as_user: true});
-                    });  
+                    });
                 }
                 //If the user wants to join a line
                 if( new RegExp("/|joinline|/").test( messageTextNoSpaces ) ){
@@ -200,7 +200,7 @@ class Oswald extends Bot {
                             that.postMessage( message.channel, userFrom.name+response, {as_user: true });
                         });
                     }
-                    
+
                 }
                 //If the user wants to see his/her line
                 else if( messageTextNoSpaces == "line" ){
@@ -221,9 +221,9 @@ class Oswald extends Bot {
                         });
                     }
                 }
-                //If the user wants to see the weather for today:
-                if(new RegExp("/|weathertoday|weather|/").test(messageTextNoSpaces)){
-                    weather.getWeather( 0, function( error, response ){
+                //If the user wants to see the weather for tomorrow:
+                if(new RegExp("/|weathertomorrow|tomorrowweather|/").test(messageTextNoSpaces)){
+                    weather.getWeather( 1, function( error, response ){
                         if(error){
                             console.error( error );
                         }else{
@@ -231,9 +231,9 @@ class Oswald extends Bot {
                         }
                     });
                 }
-                //if the user wants to see tomorrow's weather:
-                else if(new RegExp("/|weathertomorrow|/").test(messageTextNoSpaces)){
-                    weather.getWeather(1, function(error, response){
+                //if the user wants to see the weather for this week:
+                else if(new RegExp("/|weatherweek|weatherthisweek|/").test(messageTextNoSpaces)){
+                    weather.getWeather(2, function(error, response){
                         if(error){
                             console.error(error);
                         }else{
@@ -241,9 +241,9 @@ class Oswald extends Bot {
                         }
                     });
                 }
-                //if the user wants to see the week's weather:
-                else if(new RegExp("/|weatherweek|weatherthisweek|/").test(messageTextNoSpaces)){
-                    weather.getWeather(2, function(error, response){
+                //if the user wants to see the weather for today (put last):
+                else if(new RegExp("/|weather|weathertoday|/").test(messageTextNoSpaces)){
+                    weather.getWeather(0, function(error, response){
                         if(error){
                             console.error(error);
                         }else{
@@ -258,7 +258,7 @@ class Oswald extends Bot {
                 if ( new RegExp("googledrive").test(messageTextNoSpaces) ) {
                     this.postMessage(message.channel, "https://drive.google.com/open?id=0B1ui18qNXOgkSUd5ZnlPUnhSZkU", {as_user: true});
                 }
-                
+
                 //If the user has asked for the source code
                 if( messageTextNoSpaces == "source" ||  messageTextNoSpaces == "sourcecode" || messageTextNoSpaces == "code" ){
                     this.postMessage(message.channel,"https://github.com/JonahMania/Oswald",{as_user: true});
